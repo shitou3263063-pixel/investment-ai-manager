@@ -1,0 +1,16 @@
+Asset,Category,Value,Ticker
+VOO,US Stocks,130000,VOO
+NVDA,US Stocks,67000,NVDA
+GOOGL,US Stocks,20000,GOOGL
+TLT,US Stocks,56000,TLT
+IBKR,US Stocks,40000,IBKR
+XLF,US Stocks,40000,XLF
+BABA,US Stocks,28000,BABA
+HK Tech ETF,HK Stocks,135000,
+HK Healthcare ETF,HK Stocks,95000,
+HK Securities ETF,HK Stocks,30000,
+CSI300 ETF,A Shares,206000,
+Giant Network,A Shares,40000,
+China Bonds,Bonds,1130000,
+Gold,Gold,560000,GLD
+Cash,Cash,230000,
