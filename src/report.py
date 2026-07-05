@@ -9,7 +9,7 @@ def pct(x):
 
 def generate_report(portfolio_analysis, market_rows, decision):
     lines = []
-    lines.append("# Stone AI Investment Manager Pro V3.0 日报")
+    lines.append("# Stone AI Investment Manager Pro V4.0 日报")
     lines.append("")
     lines.append(f"日期：{datetime.now().strftime('%Y-%m-%d %H:%M')}")
     lines.append(f"总资产：{money(portfolio_analysis['total'])}")

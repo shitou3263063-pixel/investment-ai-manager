@@ -1,0 +1,43 @@
+base_currency: CNY
+risk_profile: balanced
+rebalance_threshold: 0.05
+cash_min_ratio: 0.08
+weekly_report_day: Sunday
+
+watchlist:
+  us:
+    SP500: ^GSPC
+    NASDAQ100: ^NDX
+    VIX: ^VIX
+    US10Y: ^TNX
+    DXY: DX-Y.NYB
+    GOLD: GC=F
+    TLT: TLT
+    VOO: VOO
+    QQQ: QQQ
+    NVDA: NVDA
+    GOOGL: GOOGL
+    IBKR: IBKR
+    XLF: XLF
+    BABA: BABA
+  hk_cn:
+    HangSeng: ^HSI
+    HangSengTech: 3033.HK
+    HS300: 510300.SS
+    ChinaA50: 2822.HK
+  crypto:
+    BTC: BTC-USD
+
+target_allocation:
+  us_equity: 0.18
+  hk_cn_equity: 0.16
+  china_equity: 0.08
+  bonds: 0.36
+  gold: 0.16
+  cash: 0.06
+
+dca_rules:
+  expensive_percentile: 0.80
+  normal_percentile: 0.60
+  cheap_percentile: 0.40
+  very_cheap_percentile: 0.20

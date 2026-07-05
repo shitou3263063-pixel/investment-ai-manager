@@ -7,15 +7,12 @@ def load_csv(path):
 
 def load_portfolio(path="data/portfolio.csv"):
     rows = load_csv(path)
-    items = []
-    for r in rows:
-        items.append({
-            "asset": r["Asset"],
-            "category": r["Category"],
-            "value": float(r["Value"]),
-            "ticker": r.get("Ticker", "")
-        })
-    return items
+    return [{
+        "asset": r["Asset"],
+        "category": r["Category"],
+        "value": float(r["Value"]),
+        "ticker": r.get("Ticker", "")
+    } for r in rows]
 
 def load_targets(path="config/target_allocation.csv"):
     rows = load_csv(path)
@@ -24,6 +21,7 @@ def load_targets(path="config/target_allocation.csv"):
 def analyze_portfolio(items, targets):
     total = sum(i["value"] for i in items)
     by_category = defaultdict(float)
+
     for i in items:
         by_category[i["category"]] += i["value"]
 
@@ -41,12 +39,7 @@ def analyze_portfolio(items, targets):
             "diff_value": diff * total
         })
 
-    holdings = []
-    for i in items:
-        holdings.append({
-            **i,
-            "ratio": i["value"] / total if total else 0
-        })
+    holdings = [{**i, "ratio": i["value"] / total if total else 0} for i in items]
 
     return {
         "total": total,

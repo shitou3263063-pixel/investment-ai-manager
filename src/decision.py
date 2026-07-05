@@ -25,7 +25,6 @@ def assess_market(market_rows):
 
 def make_decision(portfolio_analysis, market_rows):
     risk, alerts = assess_market(market_rows)
-
     actions = []
     risks = []
 
