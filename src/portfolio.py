@@ -1,22 +1,37 @@
 import csv
 from collections import defaultdict
 
+
 def load_csv(path):
     with open(path, "r", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
+
+def get_value(row, *keys, default=""):
+    for key in keys:
+        if key in row and row[key] not in ("", None):
+            return row[key]
+    return default
+
+
 def load_portfolio(path="data/portfolio.csv"):
     rows = load_csv(path)
+
     return [{
-        "asset": r["Asset"],
-        "category": r["Category"],
-        "value": float(r["Value"]),
-        "ticker": r.get("Ticker", "")
+        "asset": get_value(r, "Asset", "asset"),
+        "category": get_value(r, "Category", "category"),
+        "value": float(get_value(r, "Value", "value", "amount_cny", default=0)),
+        "ticker": get_value(r, "Ticker", "ticker"),
     } for r in rows]
+
 
 def load_targets(path="config/target_allocation.csv"):
     rows = load_csv(path)
-    return {r["Category"]: float(r["Target"]) for r in rows}
+    return {
+        get_value(r, "Category", "category"): float(get_value(r, "Target", "target", default=0))
+        for r in rows
+    }
+
 
 def analyze_portfolio(items, targets):
     total = sum(i["value"] for i in items)
@@ -36,13 +51,16 @@ def analyze_portfolio(items, targets):
             "current_ratio": current,
             "target_ratio": target,
             "diff_ratio": diff,
-            "diff_value": diff * total
+            "diff_value": diff * total,
         })
 
-    holdings = [{**i, "ratio": i["value"] / total if total else 0} for i in items]
+    holdings = [
+        {**i, "ratio": i["value"] / total if total else 0}
+        for i in items
+    ]
 
     return {
         "total": total,
         "categories": sorted(categories, key=lambda x: abs(x["diff_ratio"]), reverse=True),
-        "holdings": sorted(holdings, key=lambda x: x["value"], reverse=True)
+        "holdings": sorted(holdings, key=lambda x: x["value"], reverse=True),
     }
