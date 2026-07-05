@@ -28,14 +28,20 @@ def send_daily_report():
 
     try:
         token_url = (
-            f"https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+            "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
             f"?corpid={corp_id}&corpsecret={secret}"
         )
 
-        token = requests.get(token_url).json()["access_token"]
+        token_resp = requests.get(token_url, timeout=15).json()
+        print("企业微信 token 返回：", token_resp)
+
+        token = token_resp.get("access_token")
+        if not token:
+            print("企业微信 access_token 获取失败，请检查 WECOM_CORP_ID 和 WECOM_SECRET。")
+            return
 
         send_url = (
-            f"https://qyapi.weixin.qq.com/cgi-bin/message/send"
+            "https://qyapi.weixin.qq.com/cgi-bin/message/send"
             f"?access_token={token}"
         )
 
@@ -49,9 +55,8 @@ def send_daily_report():
             "safe": 0,
         }
 
-        r = requests.post(send_url, json=data).json()
-
-        print("企业微信推送：", r)
+        send_resp = requests.post(send_url, json=data, timeout=15).json()
+        print("企业微信推送返回：", send_resp)
 
     except Exception as e:
         print("企业微信发送失败：", e)
