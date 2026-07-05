@@ -2,6 +2,7 @@ from src.portfolio import load_portfolio, load_targets, analyze_portfolio
 from src.market import update_market_data
 from src.decision import make_decision
 from src.report import generate_report, save_report
+from src.services.wecom_service import send_daily_report
 
 def main():
     portfolio = load_portfolio()
@@ -18,6 +19,8 @@ def main():
     print(f"总资产：{portfolio_analysis['total']:,.0f} 元")
     print(f"市场风险评分：{decision['risk_score']}/100")
     print("日报已生成：reports/daily_report.md")
+
+    send_daily_report()
 
 if __name__ == "__main__":
     main()
