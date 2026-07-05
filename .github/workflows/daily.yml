@@ -9,6 +9,12 @@ jobs:
   run-daily-report:
     runs-on: ubuntu-latest
 
+    env:
+      WECOM_CORP_ID: ${{ secrets.WECOM_CORP_ID }}
+      WECOM_AGENT_ID: ${{ secrets.WECOM_AGENT_ID }}
+      WECOM_SECRET: ${{ secrets.WECOM_SECRET }}
+      WECOM_USER_ID: ${{ secrets.WECOM_USER_ID }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
