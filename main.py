@@ -3,6 +3,8 @@ from src.market import update_market_data
 from src.decision import make_decision
 from src.report import generate_report, save_report
 from src.services.wecom_service import send_daily_report
+from src.services.email_service import send_email_if_configured
+
 
 def main():
     portfolio = load_portfolio()
@@ -21,6 +23,12 @@ def main():
     print("日报已生成：reports/daily_report.md")
 
     send_daily_report()
+
+    send_email_if_configured(
+        "Stone AI Investment Manager 日报",
+        report,
+    )
+
 
 if __name__ == "__main__":
     main()
