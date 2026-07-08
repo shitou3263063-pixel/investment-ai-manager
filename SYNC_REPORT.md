@@ -4,109 +4,96 @@
 
 2026-07-08
 
-## Current Local Project
+## Local Branch
 
-- Path: `C:\Users\12120\Documents\最强大脑`
-- Git status command: failed
-- Failure: `fatal: not a git repository (or any of the parent directories): .git`
-- Note: this folder contains a `.git` directory, but it is not a valid Git repository.
-
-## Required Git Commands In Current Project
-
-### git status
-
-Result:
-
-```text
-fatal: not a git repository (or any of the parent directories): .git
-```
-
-### git remote -v
-
-Result:
-
-```text
-fatal: not a git repository (or any of the parent directories): .git
-```
-
-### git branch --show-current
-
-Result:
-
-```text
-fatal: not a git repository (or any of the parent directories): .git
-```
-
-### git log --oneline -5
-
-Result:
-
-```text
-fatal: not a git repository (or any of the parent directories): .git
-```
-
-## Nearby GitHub Repository Found
-
-- Path: `C:\Users\12120\Documents\GitHub\investment-ai-manager`
+- Active Git repository: `C:\Users\12120\Documents\GitHub\investment-ai-manager`
 - Branch: `main`
 - Upstream: `origin/main`
-- Remote:
+- Status after push: clean, up to date with `origin/main`
+
+## Remote Repository
 
 ```text
 origin  https://github.com/shitou3263063-pixel/investment-ai-manager.git (fetch)
 origin  https://github.com/shitou3263063-pixel/investment-ai-manager.git (push)
 ```
 
-- Working tree: clean
-- Current HEAD:
+## Required Git Checks
+
+### git status
 
 ```text
-89ab4a0e165f2ac5a10d4e114103976d51d0e708
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
 ```
 
-- Recent commits:
+### git remote -v
 
 ```text
+origin  https://github.com/shitou3263063-pixel/investment-ai-manager.git (fetch)
+origin  https://github.com/shitou3263063-pixel/investment-ai-manager.git (push)
+```
+
+### git branch --show-current
+
+```text
+main
+```
+
+### git log --oneline -5
+
+```text
+7e68a8d cleanup: consolidate Stone AI stable version
 89ab4a0 Fix Gmail SMTP sending
 4cfb053 Enable Gmail SMTP in GitHub Actions
 0af710e Enable Gmail daily report
 94c7b73 Enable Gmail daily report
-d4058ce Improve WeCom error logging
 ```
 
 ## Uncommitted Changes
 
-- Current project `C:\Users\12120\Documents\最强大脑`: cannot be determined by Git because the folder is not a valid Git repository.
-- Nearby GitHub repo `C:\Users\12120\Documents\GitHub\investment-ai-manager`: no uncommitted changes.
+- Before cleanup sync: the real GitHub repository had no uncommitted changes.
+- After cleanup sync and push: no uncommitted changes remain.
+- The cleaned Stone AI project from `C:\Users\12120\Documents\最强大脑` was copied into the real GitHub repository while excluding `.env`, logs, virtual environments, and Python cache files.
 
 ## Commit And Push
 
-- Requested commit message: `cleanup: consolidate Stone AI stable version`
-- Commit executed: no
-- Push executed: no
-- Reason: the current local project folder is not a valid Git repository, so `git add`, `git commit`, and `git push` cannot be safely executed there.
+- Commit created: yes
+- Commit message: `cleanup: consolidate Stone AI stable version`
+- Commit hash: `7e68a8d`
+- Push executed: yes
+- Push target: `origin main`
+- Push result: successful
 
-## GitHub Actions Status
+## GitHub Actions
 
-For the nearby GitHub repo:
+The pushed workflow now uses the cleaned stable entry point:
 
-- `.github/workflows/daily-investment-report.yml` calls `python -m src.main`
-- `.github/workflows/daily.yml` calls `python main.py`
-- Both upload `reports/`
+```text
+.github/workflows/daily.yml: run: python src/main.py
+.github/workflows/daily.yml: path: reports/latest/
+```
 
-For the cleaned current project:
+Only one report workflow remains in the repository. The previous duplicate workflow `daily-investment-report.yml` was removed.
 
-- `.github/workflows/daily.yml` calls `python src/main.py`
-- It uploads `reports/latest/`
+## Will GitHub Actions Run Latest Code?
 
-Because the cleaned current project has not been committed and pushed to the actual GitHub repository, GitHub Actions will not run the cleaned latest code yet.
+Yes.
+
+Because commit `7e68a8d` was pushed to `origin/main`, GitHub Actions will run the latest pushed code on the next scheduled run or manual `workflow_dispatch`.
 
 ## Final Sync Status
 
-- Local branch: unavailable in `C:\Users\12120\Documents\最强大脑`
-- Remote repository: unavailable in current project; nearby repo uses `https://github.com/shitou3263063-pixel/investment-ai-manager.git`
-- Has uncommitted changes: unknown for current project because Git repository is invalid
-- Push successful: no
-- Will GitHub Actions run latest cleaned code: no
-- Failure reason: current project folder is not a valid Git repository; actual GitHub repo is a separate clean folder and does not contain the cleaned files from `最强大脑`.
+- Local branch: `main`
+- Remote repository: `https://github.com/shitou3263063-pixel/investment-ai-manager.git`
+- Has uncommitted changes: no
+- Push successful: yes
+- GitHub Actions will run latest code: yes
+- Failure reason: none
+
+## Note
+
+The working folder `C:\Users\12120\Documents\最强大脑` was not itself a valid Git repository. The fix was to sync its cleaned project contents into the real GitHub repository at `C:\Users\12120\Documents\GitHub\investment-ai-manager`, then commit and push from that repository.
 
