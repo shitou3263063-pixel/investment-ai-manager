@@ -1,16 +1,17 @@
-asset,ticker,market,category,amount_cny,notes
-VOO,VOO,US,us_equity,130000,标普500ETF
-NVIDIA,NVDA,US,us_equity,67000,英伟达
-Google,GOOGL,US,us_equity,20000,谷歌
-TLT,TLT,US,bonds,56000,美国长期国债ETF
-IBKR,IBKR,US,us_equity,40000,盈透证券
-XLF,XLF,US,us_equity,40000,美国金融ETF
-Alibaba,BABA,US,hk_cn_equity,28000,阿里巴巴ADR
-Hang Seng Tech ETF,3033.HK,HK,hk_cn_equity,135000,南方恒生科技ETF
-Hang Seng Healthcare ETF,,HK,hk_cn_equity,95000,恒生医疗ETF
-Hong Kong Securities ETF,,HK,hk_cn_equity,30000,香港证券ETF
-CSI 300 ETF,510300.SS,CN,china_equity,206000,沪深300ETF
-Giant Network,002558.SZ,CN,china_equity,40000,巨人网络
-China Bonds,,CN,bonds,1130000,中国债券组合
-Gold,,GLOBAL,gold,560000,黄金
-Cash,,CASH,cash,230000,现金
+category,name,amount_wan,currency,quantity,unit,note
+美股,VOO,13.0,CNY,28,股,标普500ETF；最新资产清单更新
+美股,NVDA,6.8,CNY,51,股,英伟达
+美股,GOOG,2.2,CNY,9,股,谷歌-C
+美股,TLT,5.5,CNY,95,股,美国长期国债ETF
+美股,IBKR,4.0,CNY,64,股,盈透证券
+美股,XLF,4.2,CNY,112,股,美国金融ETF
+美股,BABA,2.8,CNY,44,股,阿里巴巴
+港股,南方恒生科技ETF 03033,13.6,CNY,,,南方恒生科技ETF
+港股,恒生医疗ETF 513060,9.6,CNY,,,恒生医疗ETF
+港股,香港证券ETF 513090,3.2,CNY,,,香港证券ETF
+A股,沪深300ETF 510300,20.6,CNY,,,沪深300ETF
+A股,巨人网络 002558,4.1,CNY,,,巨人网络
+债券,中国债券组合,113.0,CNY,,,短债、中债、长债组合
+黄金,实物金条,52.8,CNY,565,克,565克金条；临时手动估值，后续可替换为实际金条市值
+黄金,黄金ETF 518880,3.5,CNY,,,黄金ETF
+现金,现金,26.5,CNY,,,现金与货币资金

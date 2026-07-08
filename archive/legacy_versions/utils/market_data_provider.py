@@ -2,20 +2,24 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.data.sources.data_router import MARKET_TICKERS, fetch_layered_market_data
+from src.data_sources.data_router import MARKET_TICKERS, fetch_layered_market_data
 from utils.logger import write_log
 
 
 TICKERS = MARKET_TICKERS
 
 
-def fetch_market_data() -> dict[str, Any]:
-    """Run the current V12 layered market data router."""
+def fetch_yfinance_market_data() -> dict[str, Any]:
+    """Compatibility wrapper for the new layered data router.
+
+    Older code still imports this function name, but the implementation now
+    routes through Alpha Vantage, Finnhub, official sources, yfinance, and cache.
+    """
 
     try:
         return fetch_layered_market_data()
-    except Exception as error:  # noqa: BLE001 - report generation must degrade gracefully
-        message = f"Layered market data router failed; falling back to manual market_data.csv: {error}"
+    except Exception as error:  # noqa: BLE001 - data failures must never break reports
+        message = f"多源数据路由异常，回退到手动 market_data.csv：{error}"
         write_log(message, filename="data_router.log")
         return {
             "source": "manual_fallback",
@@ -37,4 +41,3 @@ def fetch_market_data() -> dict[str, Any]:
             },
             "errors": [message],
         }
-
